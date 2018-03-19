@@ -12,7 +12,13 @@ const command = process.argv[2];
 // console.log('Yargs: ', argv);
 
 if(command === 'add') {
-  notes.addNote(argv.title, argv.body);
+  var note = notes.addNote(argv.title, argv.body);
+  if(note) {
+    console.log(note);
+  } else {
+    console.log("Note already exists.");
+  }
+
 } else if(command == 'list') {
   notes.getAll();
 } else if(command == 'read') {
