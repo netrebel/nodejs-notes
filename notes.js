@@ -37,7 +37,10 @@ var getNote = (title) => {
     console.log('read: ', title);
 };
 var removeNote = (title) => {
-    console.log('remove: ', title);
+    var notes = fetchNodes();
+    var notesAfterDelete = notes.filter((note) => note.title !== title);
+    saveNotes(notesAfterDelete);
+    return notes.length !== notesAfterDelete.length;
 };
 
 
