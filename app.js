@@ -6,7 +6,31 @@ const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-const argv = yargs.argv;
+let title = {
+    describe: 'Title of the note',
+    demand: true,
+    alias: 't'
+};
+
+let body = {
+    describe: 'Body of the note',
+    demand: true,
+    alias: 'b'
+};
+const argv = yargs
+    .command('add', 'Add a new note', {
+        title: title,
+        body: body
+    })
+    .command('list', 'List all commands')
+    .command('read', 'Read a note', {
+        title: title
+    })
+    .command('remove', 'Remove a note', {
+        title: title
+    })
+    .help()
+    .argv;
 const command = process.argv[2];
 
 // console.log('Yargs: ', argv);
@@ -27,7 +51,7 @@ if (command === 'add') {
     });
 } else if (command == 'read') {
     var note = notes.getNote(argv.title);
-    if(note) {
+    if (note) {
         console.log('Note found: ' + JSON.stringify(note));
     } else {
         console.log('Note not found.')
